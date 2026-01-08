@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Nunito:wght@300;400;500;600;700;800&family=Quicksand:wght@500;600;700&family=Tomorrow:wght@400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-warm-50 dark:bg-gray-900 text-gray-700 dark:text-gray-200 transition-colors duration-300;
+    font-family: 'Nunito', system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Quicksand', system-ui, sans-serif;
+    @apply text-gray-800 dark:text-white transition-colors duration-300;
+  }
+
+  /* Completely remove all focus outlines and borders */
+  * {
+    outline: none !important;
+  }
+
+  *:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Show custom focus ring ONLY for keyboard navigation */
+  *:focus-visible {
+    @apply ring-4 ring-primary-200 dark:ring-primary-500 ring-offset-2 dark:ring-offset-gray-900 rounded-3xl;
+  }
+
+  /* Skip to main content link for screen readers */
+  .skip-to-main {
+    @apply absolute -top-full left-0 bg-primary-500 dark:bg-primary-600 text-white px-6 py-3 rounded-br-4xl z-50 font-medium;
+    @apply focus:top-0 transition-all;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply mx-auto max-w-7xl px-6;
+  }
+
+  @screen sm {
+    .container-custom {
+      @apply px-8;
+    }
+  }
+
+  @screen lg {
+    .container-custom {
+      @apply px-12;
+    }
+  }
+
+  .btn-primary {
+    @apply px-8 py-4 bg-gradient-to-r from-primary-400 to-primary-500 text-white font-semibold rounded-3xl hover:from-primary-500 hover:to-primary-600 transition-all duration-300 shadow-md hover:shadow-lg;
+    @apply focus:outline-none focus:ring-4 focus:ring-primary-200 focus:ring-offset-2;
+    @apply active:scale-[0.98] transform;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 bg-white text-primary-600 font-semibold rounded-3xl hover:bg-primary-50 transition-all duration-300 border-2 border-primary-200 shadow-sm hover:shadow-md;
+    @apply focus:outline-none focus:ring-4 focus:ring-primary-200 focus:ring-offset-2;
+    @apply active:scale-[0.98] transform;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-display;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-4xl shadow-sm hover:shadow-lg transition-all duration-300 p-8 border-2 border-gray-100 dark:border-gray-700;
+    @apply focus-within:ring-2 focus-within:ring-primary-200 dark:focus-within:ring-primary-500;
+  }
+
+  .input-field {
+    @apply w-full px-5 py-4 border-2 border-gray-200 dark:border-gray-700 rounded-3xl focus:ring-2 focus:ring-primary-300 dark:focus:ring-primary-500 focus:border-primary-400 dark:focus:border-primary-500 outline-none transition-all duration-300;
+    @apply hover:border-gray-300 dark:hover:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white;
+  }
+
+  .label {
+    @apply block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 transition-colors duration-300;
+  }
+
+  /* Link hover states */
+  a:not(.btn-primary):not(.btn-secondary) {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-200 rounded-2xl;
+  }
+
+  a:not(.btn-primary):not(.btn-secondary) {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-200 rounded-xl;
+  }
+
+  /* Toast animation */
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
+
+  /* Loading animation */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@layer utilities {
+
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Prevent horizontal overflow on mobile */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Better text rendering on mobile */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Safe area insets for notched devices */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(0px, env(safe-area-inset-left));
+      padding-right: max(0px, env(safe-area-inset-right));
+    }
+  }
+
+  /* Prevent text size adjustment on orientation change */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Better tap highlight on mobile */
+  * {
+    -webkit-tap-highlight-color: rgba(79, 70, 229, 0.1);
+  }
+
+  /* Page transition animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-transition {
+    animation: fadeInUp 0.4s ease-out;
+  }
+
+  /* Hand-drawn oval animation for logo */
+  @keyframes drawCircle {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes eraseCircle {
+    from {
+      stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: 620;
+    }
+  }
+
+  /* Hand-drawn Z-underline animation for logo */
+  @keyframes drawUnderline {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes eraseUnderline {
+    from {
+      stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: 450;
+    }
+  }
+
+  /* Mobile menu slide-in animation */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Active state scale utility */
+  .active\:scale-98:active {
+    transform: scale(0.98);
+  }
+
+  .active\:scale-95:active {
+    transform: scale(0.95);
+  }
+
+  /* Touch-friendly minimum tap target size */
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Dark mode text selection (optional enhancement) */
+  ::selection {
+    background-color: rgba(79, 70, 229, 0.3);
+    color: inherit;
+  }
+
+  /* Improved focus states for mobile */
+  @media (max-width: 768px) {
+    *:focus-visible {
+      outline: 3px solid rgba(79, 70, 229, 0.5);
+      outline-offset: 2px;
+    }
+  }
+}
